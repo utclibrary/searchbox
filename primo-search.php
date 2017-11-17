@@ -1,5 +1,7 @@
 <?php
 /*
+v3.00
+move search to Primo
 v2.1
 changed http to https on external calls
 v2 changes
@@ -25,14 +27,14 @@ $emergMessage = "<br/><br/><p><font color='red'>The UTC Library catalog will be 
 		We apologize for the inconvenience.</font></p>";
 		*/
 ?>
-<!-- dev v2.1 -->
+<!-- dev v3.01 -->
 <div id="libsearch-override" class="well well-raised">
 	<section id='section-tabs'>
 	<div id='searchboxcenter'>
 <!-- BEGIN tabs default 'desktop' display-->
 	<ul data-position='right' class='nav nav-tabs' id="tabs">
 
-			<li class='active'><a href='#everything' data-toggle='tab'>Quick Search</a></li>
+			<li class='active'><a href='#everything' data-toggle='tab'>Primo Search</a></li>
 			<li><a href='#databases' data-toggle='tab'>Databases</a></li>
       <li><a href='#subjects' data-toggle='tab'>Subjects</a></li>
       <li><a href='#journals' data-toggle='tab'>Journals</a></li>
@@ -51,14 +53,18 @@ $emergMessage = "<br/><br/><p><font color='red'>The UTC Library catalog will be 
  END select -->
 <div id='myTabContent' class='tab-content'>
 	<div class='tab-pane active' id='everything'>
-			<form aria-label="quick search form" class='form-search' name='everything' action='https://utc.on.worldcat.org/search' method='get' target='_blank'>
+			<form aria-label="quick search form" class='form-search' name='everything' action="https://utc.primo.exlibrisgroup.com/discovery/search" enctype="application/x-www-form-urlencoded; charset=utf-8" onsubmit="searchPrimo()" method="get" target='_blank'>
 				<label for="searchAll" class="hide">Search Books, Articles, Movies, and More...</label>
-				<input type='text' id="searchAll" aria-label="search input for quick search" placeholder='Search Books, Articles, Movies, and More...' class='input-xxlarge clearable' name='queryString' required />
-				<button id="Everything" type='submit' class='btn search-btn btn-primary'>Search</button>
+				<input type='text' id="searchAll" aria-label="search input for quick search" placeholder='Search Books, Articles, Movies, and More...' class='input-xxlarge clearable' style="font-size: 1.25em;min-height: 2em;margin: .5em 0 .5em 0;" required />
+				<input type="hidden" name="query" id="primoQuery">
+				<input type="hidden" name="vid" value="01UTC_INST:01UTC">
+				<input type="hidden" name="tab" value="Everything">
+				<button id="Everything" onclick="searchPrimo()"  type='submit' class='btn search-btn btn-primary' style="margin: 0 .5em 0 .5em;min-height: 3em;">Search</button>
 				<div class="spacer"></div>
+<!--
 				<label for="everythingformat" aria-label="limit quick search results to">Limit results to:</label>
-				<select id="everythingformat" class='input-medium' name='format'>
-					<option value='' selected>Everything</option>
+				<select id="everythingformat" class='input-medium' name='tab'>
+					<option value='Everything' selected>Everything</option>
 							<option value='Book'>Books</option>
 							<option value='Book::book_digital'>eBooks</option>
 							<option value='Video'>Videos</option>
@@ -68,13 +74,14 @@ $emergMessage = "<br/><br/><p><font color='red'>The UTC Library catalog will be 
 							<option value='Artchap'>Articles</option>
 					</select>
 						<label for="everythingscope" class="hide">search scope</label>
-					<select id="everythingscope" aria-label="search scope for quick search" class='input-large' name='scope'>
-						<option value=''>Libraries Worldwide</option>
-						<option value='wz:703' selected>UTC</option>
+					<select id="everythingscope" aria-label="search scope for quick search" class='input-large' name='search_scope'>
+						<option value='WorldCat'>Libraries Worldwide</option>
+						<option value='MyInst_and_CI' selected>UTC</option>
 					</select>
+-->
 	</form>
 	<?php echo $searchHelpLink; ?>
-				<a class="btn btn-mini search-xtra-right" href="https://utc.on.worldcat.org/advancedsearch" target="_blank">Advanced Search</a>
+				<a class="btn btn-mini search-xtra-right" href="https://utc.primo.exlibrisgroup.com/discovery/search?vid=01UTC_INST:01UTC&sortby=rank&mode=advanced" target="_blank">Advanced Search</a>
 	<?php if ($today < $endTime) echo $emergMessage; ?>
 	</div>
 
