@@ -86,16 +86,25 @@ $emergMessage = "<br/><br/><p><font color='red'>The UTC Library catalog will be 
 	</div>
 
 <div class='tab-pane' id='journals'>
-	<form class='form-search' name='journals' action='https://utc.on.worldcat.org/atoztitles/journals' method='get' target='_blank'>
+
+	<form class='form-search' name='journals' action='https://utc.primo.exlibrisgroup.com/discovery/jsearch' enctype="application/x-www-form-urlencoded; charset=utf-8" method='get' target='_blank'>
 	<label for="query-search-UTCL-home" class="hide" aria-label="journals search input">Search Journal</label>
-	<input  id="query-search-UTCL-home" type='text' placeholder='Enter a Journal Title' class='input-xxlarge clearable' name='jtitle' required />
-	<button id="Journals" type='submit' class='btn search-btn btn-primary'>Search</button>
+
+	<input id="primoQueryJ" name="query" type="hidden" />
+		<input name="tab" type="hidden" value="jsearch_slot" />
+		<input name="vid" type="hidden" value="01UTC_INST:01UTC" />
+		<input name="offset" type="hidden" value="0" />
+	 <input id="primoQueryjournals" name="journals" type="hidden" />
+	<input  id="query-search-UTCL-home" type='text' placeholder='Enter Journal Title or ISSN' class='input-xxlarge clearable' name='jtitle' style="font-size: 1.25em;min-height: 2em;margin: .5em 0 .5em 0;" required />
+	<button id="Journals" type='submit' class='btn search-btn btn-primary' onclick="searchPrimoJ()" style="margin: 0 .5em 0 .5em;min-height: 3em;">Search</button>
 	<div class="spacer"></div>
+	<!--
 		<label for="journalsscope" aria-label="limit journals results to">Search type:</label>
 			<select id="journalsscope" class='input-medium' name='search_field'>
 				<option value='title' selected>Title</option>
 				<option value='issn'>ISSN</option>
 		</select>
+
 	<label class="hide" for="searchBy-UTCL-home" aria-label="what to match">what to match</label>
 		<select id="searchBy-UTCL-home" class='input-medium' name='searchType'>
 			<option value='startsWith' selected>Starts With</option>
@@ -103,6 +112,7 @@ $emergMessage = "<br/><br/><p><font color='red'>The UTC Library catalog will be 
 			<option value='matchAll'>Match All</option>
 			<option value='matchAny'>Match Any</option>
 		</select>
+			-->
 	</form>
 <small class="pull-left"><?php echo $searchHelpLink; ?></small>
 <?php if ($today < $endTime) echo $emergMessage; ?>
