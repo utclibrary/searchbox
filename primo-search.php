@@ -423,11 +423,16 @@ if (!$con || empty($result))
 				}
 				mysql_close($con);
 ?>
+<!--
 <div class="alert alert-success span10 offset1" style="margin-right: auto;width: 100%;margin-left: auto;">
+
   <button class="close" data-dismiss="alert">×</button>
+
 <em>Great News!</em><p>
 You can now access Subject Guides from the Databases tab!</p>
+
   </div>
+-->
 <!-- hide these for now
 <a  class="btn btn-mini search-xtra-left" href="https://guides.lib.utc.edu/eresources" target="_blank">Databases By Subject</a
 <a  class="btn btn-mini search-xtra-right" href="https://guides.lib.utc.edu/" target="_blank">Subject Guides</a>
